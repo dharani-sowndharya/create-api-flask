@@ -1,6 +1,6 @@
 # Objective
-Runs a flask app that connects to git to list the public gists
-https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#list-public-gists
+Runs a flask app that connects to git to list the public gists. 
+API used underneath: https://docs.github.com/en/rest/gists/gists?apiVersion=2022-11-28#list-public-gists
 
 # Supported endpoints (Supports only 'GET' methods)
 1. "/" - Loads a default response
