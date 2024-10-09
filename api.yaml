@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-api
-        image: dharanisowndharya/flask-api:latest
+        image: dharanisowndharya/flask-api:DOCKER_IMAGE_TAG
         ports:
         - containerPort: 8080
 
