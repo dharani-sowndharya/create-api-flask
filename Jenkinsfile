@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_IMAGE = "dharanisowndharya/flask-api:${BUILD_NUMBER}"
+    }
 
     stages {
         stage('Clone repo') {
@@ -9,7 +12,23 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh "docker build . -t ${BUILD_NUMBER}"
+                sh "docker build . -t ${DOCKER_IMAGE}"
+            }
+        }
+        stage('Docker push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PWD', usernameVariable: 'USER')]) {
+                    sh """
+                    docker login --username ${USER} --password ${PWD}
+                    docker push ${DOCKER_IMAGE}
+                    """
+                }
+                
+            }
+        }
+        stage('Deploy to k8s') {
+            steps {
+                sh "kubectl get pods"
             }
         }
     }   
